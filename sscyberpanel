@@ -1,0 +1,378 @@
+--// SSCYBER PANEL
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local LOGO_ID = "rbxassetid://82995234642982"
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "SSCYBER_PANEL"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+--// Loading
+local loading = Instance.new("Frame")
+loading.Size = UDim2.fromScale(1, 1)
+loading.BackgroundColor3 = Color3.fromRGB(7, 7, 10)
+loading.BorderSizePixel = 0
+loading.Parent = gui
+
+local loadingLogo = Instance.new("ImageLabel")
+loadingLogo.Name = "SSCYBER_LOADING_LOGO"
+loadingLogo.Size = UDim2.fromOffset(180, 180)
+loadingLogo.AnchorPoint = Vector2.new(0.5, 0.5)
+loadingLogo.Position = UDim2.new(0.5, 0, 0.43, 0)
+loadingLogo.BackgroundTransparency = 1
+loadingLogo.Image = LOGO_ID
+loadingLogo.ScaleType = Enum.ScaleType.Fit
+loadingLogo.Parent = loading
+
+local loadTitle = Instance.new("TextLabel")
+loadTitle.Size = UDim2.new(1, 0, 0, 45)
+loadTitle.AnchorPoint = Vector2.new(0.5, 0)
+loadTitle.Position = UDim2.new(0.5, 0, 0.43, 105)
+loadTitle.BackgroundTransparency = 1
+loadTitle.Text = "SSCYBER PANEL"
+loadTitle.TextColor3 = Color3.new(1, 1, 1)
+loadTitle.TextSize = 27
+loadTitle.Font = Enum.Font.GothamBold
+loadTitle.Parent = loading
+
+local loadingText = Instance.new("TextLabel")
+loadingText.Size = UDim2.new(1, 0, 0, 25)
+loadingText.AnchorPoint = Vector2.new(0.5, 0)
+loadingText.Position = UDim2.new(0.5, 0, 0.43, 145)
+loadingText.BackgroundTransparency = 1
+loadingText.Text = "LOADING..."
+loadingText.TextColor3 = Color3.fromRGB(150, 150, 160)
+loadingText.TextSize = 12
+loadingText.Font = Enum.Font.Gotham
+loadingText.Parent = loading
+
+task.spawn(function()
+	while loading.Parent do
+		loadingLogo.Rotation += 2
+		task.wait(0.015)
+	end
+end)
+
+task.wait(3)
+loading:Destroy()
+
+--// Password Screen
+local login = Instance.new("Frame")
+login.Size = UDim2.fromOffset(300, 175)
+login.Position = UDim2.new(.5, -150, .5, -87)
+login.BackgroundColor3 = Color3.fromRGB(13, 13, 18)
+login.BorderSizePixel = 0
+login.Parent = gui
+
+local loginCorner = Instance.new("UICorner")
+loginCorner.CornerRadius = UDim.new(0, 12)
+loginCorner.Parent = login
+
+local passwordBox = Instance.new("TextBox")
+passwordBox.Size = UDim2.new(1, -36, 0, 42)
+passwordBox.Position = UDim2.fromOffset(18, 35)
+passwordBox.BackgroundColor3 = Color3.fromRGB(23, 23, 30)
+passwordBox.BorderSizePixel = 0
+passwordBox.PlaceholderText = "Password"
+passwordBox.Text = ""
+passwordBox.TextColor3 = Color3.new(1, 1, 1)
+passwordBox.PlaceholderColor3 = Color3.fromRGB(120, 120, 130)
+passwordBox.TextSize = 15
+passwordBox.Font = Enum.Font.Gotham
+passwordBox.ClearTextOnFocus = false
+passwordBox.TextXAlignment = Enum.TextXAlignment.Center
+passwordBox.Parent = login
+
+local boxCorner = Instance.new("UICorner")
+boxCorner.CornerRadius = UDim.new(0, 8)
+boxCorner.Parent = passwordBox
+
+local enter = Instance.new("TextButton")
+enter.Size = UDim2.new(1, -36, 0, 38)
+enter.Position = UDim2.fromOffset(18, 92)
+enter.BackgroundColor3 = Color3.fromRGB(35, 35, 43)
+enter.BorderSizePixel = 0
+enter.Text = "ENTER"
+enter.TextColor3 = Color3.new(1, 1, 1)
+enter.TextSize = 14
+enter.Font = Enum.Font.GothamBold
+enter.Parent = login
+
+local enterCorner = Instance.new("UICorner")
+enterCorner.CornerRadius = UDim.new(0, 8)
+enterCorner.Parent = enter
+
+local errorText = Instance.new("TextLabel")
+errorText.Size = UDim2.new(1, -36, 0, 22)
+errorText.Position = UDim2.fromOffset(18, 135)
+errorText.BackgroundTransparency = 1
+errorText.Text = ""
+errorText.TextColor3 = Color3.fromRGB(255, 80, 80)
+errorText.TextSize = 12
+errorText.Font = Enum.Font.Gotham
+errorText.Parent = login
+
+--// Main Panel
+local function createPanel()
+
+	login:Destroy()
+
+	local panel = Instance.new("Frame")
+	panel.Size = UDim2.fromOffset(330, 210)
+	panel.Position = UDim2.new(.5, -165, .5, -105)
+	panel.BackgroundColor3 = Color3.fromRGB(13, 13, 18)
+	panel.BorderSizePixel = 0
+	panel.Parent = gui
+
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0, 12)
+	corner.Parent = panel
+
+	--// Header
+	local header = Instance.new("Frame")
+	header.Size = UDim2.new(1, 0, 0, 45)
+	header.BackgroundTransparency = 1
+	header.Parent = panel
+
+	--// Header Logo Box
+	local headerLogoBox = Instance.new("Frame")
+	headerLogoBox.Size = UDim2.fromOffset(36, 36)
+	headerLogoBox.Position = UDim2.fromOffset(8, 5)
+	headerLogoBox.BackgroundColor3 = Color3.fromRGB(22, 22, 29)
+	headerLogoBox.BorderSizePixel = 0
+	headerLogoBox.Parent = header
+
+	local headerLogoCorner = Instance.new("UICorner")
+	headerLogoCorner.CornerRadius = UDim.new(0, 8)
+	headerLogoCorner.Parent = headerLogoBox
+
+	local headerLogo = Instance.new("ImageLabel")
+	headerLogo.Size = UDim2.fromOffset(30, 30)
+	headerLogo.Position = UDim2.fromOffset(3, 3)
+	headerLogo.BackgroundTransparency = 1
+	headerLogo.Image = LOGO_ID
+	headerLogo.ScaleType = Enum.ScaleType.Fit
+	headerLogo.Parent = headerLogoBox
+
+	--// Rotate Header Logo
+	task.spawn(function()
+		while headerLogo.Parent do
+			headerLogo.Rotation += 1
+			task.wait(0.03)
+		end
+	end)
+
+	--// Title
+	local title = Instance.new("TextLabel")
+	title.Size = UDim2.new(1, -115, 1, 0)
+	title.Position = UDim2.fromOffset(52, 0)
+	title.BackgroundTransparency = 1
+	title.Text = "SSCYBER PANEL"
+	title.TextColor3 = Color3.new(1, 1, 1)
+	title.TextSize = 18
+	title.Font = Enum.Font.GothamBold
+	title.TextXAlignment = Enum.TextXAlignment.Left
+	title.Parent = header
+
+	--// Minimize
+	local minimize = Instance.new("TextButton")
+	minimize.Size = UDim2.fromOffset(34, 30)
+	minimize.Position = UDim2.new(1, -42, 0, 7)
+	minimize.BackgroundColor3 = Color3.fromRGB(28, 28, 35)
+	minimize.BorderSizePixel = 0
+	minimize.Text = "—"
+	minimize.TextColor3 = Color3.new(1, 1, 1)
+	minimize.TextSize = 18
+	minimize.Font = Enum.Font.GothamBold
+	minimize.Parent = header
+
+	local minCorner = Instance.new("UICorner")
+	minCorner.CornerRadius = UDim.new(0, 8)
+	minCorner.Parent = minimize
+
+	--// Content
+	local content = Instance.new("Frame")
+	content.Size = UDim2.new(1, -24, 1, -58)
+	content.Position = UDim2.fromOffset(12, 52)
+	content.BackgroundColor3 = Color3.fromRGB(20, 20, 27)
+	content.BorderSizePixel = 0
+	content.Parent = panel
+
+	local contentCorner = Instance.new("UICorner")
+	contentCorner.CornerRadius = UDim.new(0, 9)
+	contentCorner.Parent = content
+
+	--// COPY ROBLOX MINIGAME
+	local copyGame = Instance.new("TextButton")
+	copyGame.Size = UDim2.new(1, -20, 0, 34)
+	copyGame.Position = UDim2.fromOffset(10, 10)
+	copyGame.BackgroundColor3 = Color3.fromRGB(30, 30, 38)
+	copyGame.BorderSizePixel = 0
+	copyGame.Text = "COPY ROBLOX MINIGAME"
+	copyGame.TextColor3 = Color3.new(1, 1, 1)
+	copyGame.TextSize = 11
+	copyGame.Font = Enum.Font.GothamBold
+	copyGame.Parent = content
+
+	local copyCorner = Instance.new("UICorner")
+	copyCorner.CornerRadius = UDim.new(0, 8)
+	copyCorner.Parent = copyGame
+
+	copyGame.MouseButton1Click:Connect(function()
+
+		local Params = {
+			RepoURL = "https://raw.githubusercontent.com/luau/SynSaveInstance/main/",
+			SSI = "saveinstance",
+		}
+
+		local synsaveinstance = loadstring(
+			game:HttpGet(
+				Params.RepoURL .. Params.SSI .. ".luau",
+				true
+			),
+			Params.SSI
+		)()
+
+		local Options = {}
+
+		synsaveinstance(Options)
+
+		synsaveinstance = nil
+
+		copyGame.Text = "SELECTED"
+
+		task.wait(1)
+
+		copyGame.Text = "COPY ROBLOX MINIGAME"
+	end)
+
+	--// Minimized Logo
+	local small = Instance.new("ImageButton")
+	small.Size = UDim2.fromOffset(58, 58)
+	small.Position = UDim2.new(1, -70, 1, -70)
+	small.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
+	small.BorderSizePixel = 0
+	small.Image = LOGO_ID
+	small.ScaleType = Enum.ScaleType.Fit
+	small.Visible = false
+	small.Parent = gui
+
+	local smallCorner = Instance.new("UICorner")
+	smallCorner.CornerRadius = UDim.new(1, 0)
+	smallCorner.Parent = small
+
+	--// Rotate Minimized Logo
+	task.spawn(function()
+
+		while small.Parent do
+
+			if small.Visible then
+				small.Rotation += 2
+			end
+
+			task.wait(0.015)
+		end
+
+	end)
+
+	--// Drag
+	local dragging = false
+	local dragStart
+	local startPos
+
+	header.InputBegan:Connect(function(input)
+
+		if input.UserInputType == Enum.UserInputType.MouseButton1
+			or input.UserInputType == Enum.UserInputType.Touch then
+
+			dragging = true
+			dragStart = input.Position
+			startPos = panel.Position
+
+		end
+
+	end)
+
+	UserInputService.InputChanged:Connect(function(input)
+
+		if dragging and (
+			input.UserInputType == Enum.UserInputType.MouseMovement
+			or input.UserInputType == Enum.UserInputType.Touch
+		) then
+
+			local delta = input.Position - dragStart
+
+			panel.Position = UDim2.new(
+				startPos.X.Scale,
+				startPos.X.Offset + delta.X,
+				startPos.Y.Scale,
+				startPos.Y.Offset + delta.Y
+			)
+
+		end
+
+	end)
+
+	UserInputService.InputEnded:Connect(function(input)
+
+		if input.UserInputType == Enum.UserInputType.MouseButton1
+			or input.UserInputType == Enum.UserInputType.Touch then
+
+			dragging = false
+
+		end
+
+	end)
+
+	--// Minimize
+	minimize.MouseButton1Click:Connect(function()
+
+		small.Position = UDim2.fromOffset(
+			panel.AbsolutePosition.X + panel.AbsoluteSize.X - 55,
+			panel.AbsolutePosition.Y + panel.AbsoluteSize.Y - 55
+		)
+
+		panel.Visible = false
+		small.Visible = true
+
+	end)
+
+	--// Restore
+	small.MouseButton1Click:Connect(function()
+
+		small.Visible = false
+		panel.Visible = true
+
+	end)
+
+end
+
+--// Password
+local function checkPassword()
+
+	if passwordBox.Text == "sscyber team" then
+
+		createPanel()
+
+	else
+
+		errorText.Text = "Wrong password"
+		passwordBox.Text = ""
+
+	end
+
+end
+
+enter.MouseButton1Click:Connect(checkPassword)
+
+passwordBox.FocusLost:Connect(function(enterPressed)
+
+	if enterPressed then
+		checkPassword()
+	end
+
+end)
