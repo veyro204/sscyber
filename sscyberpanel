@@ -4,7 +4,7 @@ local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 
 local player = Players.LocalPlayer
-local LOGO_ID = "rbxassetid://82995234642982"
+local LOGO_ID = "rbxassetid://136747016286572"
 
 local gui = Instance.new("ScreenGui")
 gui.Name = "SSCYBER_PANEL"
