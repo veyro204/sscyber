@@ -1,3 +1,4 @@
+```lua
 --// SSCYBER PANEL
 
 local Players = game:GetService("Players")
@@ -122,8 +123,8 @@ local function createPanel()
 	login:Destroy()
 
 	local panel = Instance.new("Frame")
-	panel.Size = UDim2.fromOffset(330, 210)
-	panel.Position = UDim2.new(.5, -165, .5, -105)
+	panel.Size = UDim2.fromOffset(330, 255)
+	panel.Position = UDim2.new(.5, -165, .5, -127)
 	panel.BackgroundColor3 = Color3.fromRGB(13, 13, 18)
 	panel.BorderSizePixel = 0
 	panel.Parent = gui
@@ -158,7 +159,6 @@ local function createPanel()
 	headerLogo.ScaleType = Enum.ScaleType.Fit
 	headerLogo.Parent = headerLogoBox
 
-	--// Rotate Header Logo
 	task.spawn(function()
 		while headerLogo.Parent do
 			headerLogo.Rotation += 1
@@ -223,7 +223,6 @@ local function createPanel()
 	copyCorner.Parent = copyGame
 
 	copyGame.MouseButton1Click:Connect(function()
-
 		local Params = {
 			RepoURL = "https://raw.githubusercontent.com/luau/SynSaveInstance/main/",
 			SSI = "saveinstance",
@@ -250,6 +249,22 @@ local function createPanel()
 		copyGame.Text = "COPY ROBLOX MINIGAME"
 	end)
 
+	--// LALOL HUB BUTTON
+	local lalolHub = Instance.new("TextButton")
+	lalolHub.Size = UDim2.new(1, -20, 0, 34)
+	lalolHub.Position = UDim2.fromOffset(10, 54)
+	lalolHub.BackgroundColor3 = Color3.fromRGB(30, 30, 38)
+	lalolHub.BorderSizePixel = 0
+	lalolHub.Text = "Lalol Hub"
+	lalolHub.TextColor3 = Color3.new(1, 1, 1)
+	lalolHub.TextSize = 11
+	lalolHub.Font = Enum.Font.GothamBold
+	lalolHub.Parent = content
+
+	local lalolCorner = Instance.new("UICorner")
+	lalolCorner.CornerRadius = UDim.new(0, 8)
+	lalolCorner.Parent = lalolHub
+
 	--// Minimized Logo
 	local small = Instance.new("ImageButton")
 	small.Size = UDim2.fromOffset(58, 58)
@@ -265,40 +280,121 @@ local function createPanel()
 	smallCorner.CornerRadius = UDim.new(1, 0)
 	smallCorner.Parent = small
 
-	--// Rotate Minimized Logo
 	task.spawn(function()
-
 		while small.Parent do
-
 			if small.Visible then
 				small.Rotation += 2
 			end
-
 			task.wait(0.015)
 		end
-
 	end)
 
-	--// Drag
+	--// Lalol Hub Window
+	local lalolWindow = Instance.new("Frame")
+	lalolWindow.Size = UDim2.fromOffset(360, 300)
+	lalolWindow.Position = UDim2.new(.5, -180, .5, -150)
+	lalolWindow.BackgroundColor3 = Color3.fromRGB(13, 13, 18)
+	lalolWindow.BorderSizePixel = 0
+	lalolWindow.Visible = false
+	lalolWindow.Parent = gui
+
+	local lalolWindowCorner = Instance.new("UICorner")
+	lalolWindowCorner.CornerRadius = UDim.new(0, 12)
+	lalolWindowCorner.Parent = lalolWindow
+
+	--// Lalol Header
+	local lalolHeader = Instance.new("Frame")
+	lalolHeader.Size = UDim2.new(1, 0, 0, 45)
+	lalolHeader.BackgroundTransparency = 1
+	lalolHeader.Parent = lalolWindow
+
+	local lalolTitle = Instance.new("TextLabel")
+	lalolTitle.Size = UDim2.new(1, -70, 1, 0)
+	lalolTitle.Position = UDim2.fromOffset(15, 0)
+	lalolTitle.BackgroundTransparency = 1
+	lalolTitle.Text = "Lalol Hub"
+	lalolTitle.TextColor3 = Color3.new(1, 1, 1)
+	lalolTitle.TextSize = 17
+	lalolTitle.Font = Enum.Font.GothamBold
+	lalolTitle.TextXAlignment = Enum.TextXAlignment.Left
+	lalolTitle.Parent = lalolHeader
+
+	--// Close
+	local lalolClose = Instance.new("TextButton")
+	lalolClose.Size = UDim2.fromOffset(34, 30)
+	lalolClose.Position = UDim2.new(1, -42, 0, 7)
+	lalolClose.BackgroundColor3 = Color3.fromRGB(28, 28, 35)
+	lalolClose.BorderSizePixel = 0
+	lalolClose.Text = "×"
+	lalolClose.TextColor3 = Color3.new(1, 1, 1)
+	lalolClose.TextSize = 20
+	lalolClose.Font = Enum.Font.GothamBold
+	lalolClose.Parent = lalolHeader
+
+	local lalolCloseCorner = Instance.new("UICorner")
+	lalolCloseCorner.CornerRadius = UDim.new(0, 8)
+	lalolCloseCorner.Parent = lalolClose
+
+	--// Code Box
+	local codeBox = Instance.new("TextBox")
+	codeBox.Size = UDim2.new(1, -24, 1, -75)
+	codeBox.Position = UDim2.fromOffset(12, 52)
+	codeBox.BackgroundColor3 = Color3.fromRGB(23, 23, 30)
+	codeBox.BorderSizePixel = 0
+	codeBox.Text = ""
+	codeBox.PlaceholderText = "loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-LALOL-Hub-Backdoor-Scanner-Without-the-Hint-52003"))()"
+	codeBox.TextColor3 = Color3.new(1, 1, 1)
+	codeBox.PlaceholderColor3 = Color3.fromRGB(110, 110, 120)
+	codeBox.TextSize = 12
+	codeBox.Font = Enum.Font.Code
+	codeBox.TextXAlignment = Enum.TextXAlignment.Left
+	codeBox.TextYAlignment = Enum.TextYAlignment.Top
+	codeBox.ClearTextOnFocus = false
+	codeBox.MultiLine = true
+	codeBox.Parent = lalolWindow
+
+	local codeCorner = Instance.new("UICorner")
+	codeCorner.CornerRadius = UDim.new(0, 8)
+	codeCorner.Parent = codeBox
+
+	--// Status
+	local status = Instance.new("TextLabel")
+	status.Size = UDim2.new(1, -24, 0, 20)
+	status.Position = UDim2.fromOffset(12, 275)
+	status.BackgroundTransparency = 1
+	status.Text = "Ready"
+	status.TextColor3 = Color3.fromRGB(150, 150, 160)
+	status.TextSize = 11
+	status.Font = Enum.Font.Gotham
+	status.TextXAlignment = Enum.TextXAlignment.Left
+	status.Parent = lalolWindow
+
+	--// Lalol Hub Open
+	lalolHub.MouseButton1Click:Connect(function()
+		lalolWindow.Visible = true
+	end)
+
+	--// Lalol Hub Close
+	lalolClose.MouseButton1Click:Connect(function()
+		lalolWindow.Visible = false
+	end)
+
+	--// Drag Main Panel
 	local dragging = false
 	local dragStart
 	local startPos
 
 	header.InputBegan:Connect(function(input)
-
 		if input.UserInputType == Enum.UserInputType.MouseButton1
 			or input.UserInputType == Enum.UserInputType.Touch then
 
 			dragging = true
 			dragStart = input.Position
 			startPos = panel.Position
-
 		end
-
 	end)
 
 	UserInputService.InputChanged:Connect(function(input)
-
 		if dragging and (
 			input.UserInputType == Enum.UserInputType.MouseMovement
 			or input.UserInputType == Enum.UserInputType.Touch
@@ -312,25 +408,19 @@ local function createPanel()
 				startPos.Y.Scale,
 				startPos.Y.Offset + delta.Y
 			)
-
 		end
-
 	end)
 
 	UserInputService.InputEnded:Connect(function(input)
-
 		if input.UserInputType == Enum.UserInputType.MouseButton1
 			or input.UserInputType == Enum.UserInputType.Touch then
 
 			dragging = false
-
 		end
-
 	end)
 
 	--// Minimize
 	minimize.MouseButton1Click:Connect(function()
-
 		small.Position = UDim2.fromOffset(
 			panel.AbsolutePosition.X + panel.AbsoluteSize.X - 55,
 			panel.AbsolutePosition.Y + panel.AbsoluteSize.Y - 55
@@ -338,41 +428,30 @@ local function createPanel()
 
 		panel.Visible = false
 		small.Visible = true
-
 	end)
 
 	--// Restore
 	small.MouseButton1Click:Connect(function()
-
 		small.Visible = false
 		panel.Visible = true
-
 	end)
-
 end
 
 --// Password
 local function checkPassword()
-
 	if passwordBox.Text == "sscyber team" then
-
 		createPanel()
-
 	else
-
 		errorText.Text = "Wrong password"
 		passwordBox.Text = ""
-
 	end
-
 end
 
 enter.MouseButton1Click:Connect(checkPassword)
 
 passwordBox.FocusLost:Connect(function(enterPressed)
-
 	if enterPressed then
 		checkPassword()
 	end
-
 end)
+```
