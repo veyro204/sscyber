@@ -58,12 +58,15 @@ task.spawn(function()
 end)
 
 task.wait(3)
-loading:Destroy()
+
+if loading.Parent then
+	loading:Destroy()
+end
 
 --// Password Screen
 local login = Instance.new("Frame")
 login.Size = UDim2.fromOffset(300, 175)
-login.Position = UDim2.new(.5, -150, .5, -87)
+login.Position = UDim2.new(0.5, -150, 0.5, -87)
 login.BackgroundColor3 = Color3.fromRGB(13, 13, 18)
 login.BorderSizePixel = 0
 login.Parent = gui
@@ -119,11 +122,15 @@ errorText.Parent = login
 --// Main Panel
 local function createPanel()
 
+	if not login or not login.Parent then
+		return
+	end
+
 	login:Destroy()
 
 	local panel = Instance.new("Frame")
 	panel.Size = UDim2.fromOffset(330, 255)
-	panel.Position = UDim2.new(.5, -165, .5, -127)
+	panel.Position = UDim2.new(0.5, -165, 0.5, -127)
 	panel.BackgroundColor3 = Color3.fromRGB(13, 13, 18)
 	panel.BorderSizePixel = 0
 	panel.Parent = gui
@@ -222,30 +229,50 @@ local function createPanel()
 	copyCorner.Parent = copyGame
 
 	copyGame.MouseButton1Click:Connect(function()
-		local Params = {
-			RepoURL = "https://raw.githubusercontent.com/luau/SynSaveInstance/main/",
-			SSI = "saveinstance",
-		}
 
-		local synsaveinstance = loadstring(
-			game:HttpGet(
+		copyGame.Text = "LOADING..."
+
+		local success, result = pcall(function()
+
+			local Params = {
+				RepoURL = "https://raw.githubusercontent.com/luau/SynSaveInstance/main/",
+				SSI = "saveinstance",
+			}
+
+			local source = game:HttpGet(
 				Params.RepoURL .. Params.SSI .. ".luau",
 				true
-			),
-			Params.SSI
-		)()
+			)
 
-		local Options = {}
+			local loader = loadstring(source, Params.SSI)
 
-		synsaveinstance(Options)
+			if not loader then
+				error("Failed to load SaveInstance")
+			end
 
-		synsaveinstance = nil
+			local synsaveinstance = loader()
 
-		copyGame.Text = "SELECTED"
+			if typeof(synsaveinstance) ~= "function" then
+				error("SaveInstance did not return a function")
+			end
+
+			synsaveinstance({})
+
+			return true
+		end)
+
+		if success then
+			copyGame.Text = "SELECTED"
+		else
+			copyGame.Text = "ERROR"
+			warn("SSCYBER SaveInstance Error:", result)
+		end
 
 		task.wait(1)
 
-		copyGame.Text = "COPY ROBLOX MINIGAME"
+		if copyGame.Parent then
+			copyGame.Text = "COPY ROBLOX MINIGAME"
+		end
 	end)
 
 	--// LALOL HUB BUTTON
@@ -291,7 +318,7 @@ local function createPanel()
 	--// Lalol Hub Window
 	local lalolWindow = Instance.new("Frame")
 	lalolWindow.Size = UDim2.fromOffset(360, 300)
-	lalolWindow.Position = UDim2.new(.5, -180, .5, -150)
+	lalolWindow.Position = UDim2.new(0.5, -180, 0.5, -150)
 	lalolWindow.BackgroundColor3 = Color3.fromRGB(13, 13, 18)
 	lalolWindow.BorderSizePixel = 0
 	lalolWindow.Visible = false
@@ -341,7 +368,7 @@ local function createPanel()
 	codeBox.BackgroundColor3 = Color3.fromRGB(23, 23, 30)
 	codeBox.BorderSizePixel = 0
 	codeBox.Text = ""
-	codeBox.PlaceholderText = "loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-LALOL-Hub-Backdoor-Scanner-Without-the-Hint-52003"))()"
+	codeBox.PlaceholderText = 'loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-LALOL-Hub-Backdoor-Scanner-Without-the-Hint-52003"))()'
 	codeBox.TextColor3 = Color3.new(1, 1, 1)
 	codeBox.PlaceholderColor3 = Color3.fromRGB(110, 110, 120)
 	codeBox.TextSize = 12
@@ -359,7 +386,7 @@ local function createPanel()
 	--// Status
 	local status = Instance.new("TextLabel")
 	status.Size = UDim2.new(1, -24, 0, 20)
-	status.Position = UDim2.fromOffset(12, 275)
+	status.Position = UDim2.new(0, 12, 1, -25)
 	status.BackgroundTransparency = 1
 	status.Text = "Ready"
 	status.TextColor3 = Color3.fromRGB(150, 150, 160)
