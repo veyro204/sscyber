@@ -19,7 +19,6 @@ loading.BorderSizePixel = 0
 loading.Parent = gui
 
 local loadingLogo = Instance.new("ImageLabel")
-loadingLogo.Name = "SSCYBER_LOADING_LOGO"
 loadingLogo.Size = UDim2.fromOffset(180, 180)
 loadingLogo.AnchorPoint = Vector2.new(0.5, 0.5)
 loadingLogo.Position = UDim2.new(0.5, 0, 0.43, 0)
@@ -30,8 +29,7 @@ loadingLogo.Parent = loading
 
 local loadTitle = Instance.new("TextLabel")
 loadTitle.Size = UDim2.new(1, 0, 0, 45)
-loadTitle.AnchorPoint = Vector2.new(0.5, 0)
-loadTitle.Position = UDim2.new(0.5, 0, 0.43, 105)
+loadTitle.Position = UDim2.new(0, 0, 0.43, 105)
 loadTitle.BackgroundTransparency = 1
 loadTitle.Text = "SSCYBER PANEL"
 loadTitle.TextColor3 = Color3.new(1, 1, 1)
@@ -41,8 +39,7 @@ loadTitle.Parent = loading
 
 local loadingText = Instance.new("TextLabel")
 loadingText.Size = UDim2.new(1, 0, 0, 25)
-loadingText.AnchorPoint = Vector2.new(0.5, 0)
-loadingText.Position = UDim2.new(0.5, 0, 0.43, 145)
+loadingText.Position = UDim2.new(0, 0, 0.43, 145)
 loadingText.BackgroundTransparency = 1
 loadingText.Text = "LOADING..."
 loadingText.TextColor3 = Color3.fromRGB(150, 150, 160)
@@ -122,10 +119,6 @@ errorText.Parent = login
 --// Main Panel
 local function createPanel()
 
-	if not login or not login.Parent then
-		return
-	end
-
 	login:Destroy()
 
 	local panel = Instance.new("Frame")
@@ -145,7 +138,6 @@ local function createPanel()
 	header.BackgroundTransparency = 1
 	header.Parent = panel
 
-	--// Header Logo Box
 	local headerLogoBox = Instance.new("Frame")
 	headerLogoBox.Size = UDim2.fromOffset(36, 36)
 	headerLogoBox.Position = UDim2.fromOffset(8, 5)
@@ -172,7 +164,6 @@ local function createPanel()
 		end
 	end)
 
-	--// Title
 	local title = Instance.new("TextLabel")
 	title.Size = UDim2.new(1, -115, 1, 0)
 	title.Position = UDim2.fromOffset(52, 0)
@@ -228,54 +219,7 @@ local function createPanel()
 	copyCorner.CornerRadius = UDim.new(0, 8)
 	copyCorner.Parent = copyGame
 
-	copyGame.MouseButton1Click:Connect(function()
-
-		copyGame.Text = "LOADING..."
-
-		local success, result = pcall(function()
-
-			local Params = {
-				RepoURL = "https://raw.githubusercontent.com/luau/SynSaveInstance/main/",
-				SSI = "saveinstance",
-			}
-
-			local source = game:HttpGet(
-				Params.RepoURL .. Params.SSI .. ".luau",
-				true
-			)
-
-			local loader = loadstring(source, Params.SSI)
-
-			if not loader then
-				error("Failed to load SaveInstance")
-			end
-
-			local synsaveinstance = loader()
-
-			if typeof(synsaveinstance) ~= "function" then
-				error("SaveInstance did not return a function")
-			end
-
-			synsaveinstance({})
-
-			return true
-		end)
-
-		if success then
-			copyGame.Text = "SELECTED"
-		else
-			copyGame.Text = "ERROR"
-			warn("SSCYBER SaveInstance Error:", result)
-		end
-
-		task.wait(1)
-
-		if copyGame.Parent then
-			copyGame.Text = "COPY ROBLOX MINIGAME"
-		end
-	end)
-
-	--// LALOL HUB BUTTON
+	--// LALOL HUB
 	local lalolHub = Instance.new("TextButton")
 	lalolHub.Size = UDim2.new(1, -20, 0, 34)
 	lalolHub.Position = UDim2.fromOffset(10, 54)
@@ -290,6 +234,10 @@ local function createPanel()
 	local lalolCorner = Instance.new("UICorner")
 	lalolCorner.CornerRadius = UDim.new(0, 8)
 	lalolCorner.Parent = lalolHub
+
+	lalolHub.MouseButton1Click:Connect(function()
+		loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-LALOL-Hub-Backdoor-Scanner-Without-the-Hint-52003"))()
+	end)
 
 	--// Minimized Logo
 	local small = Instance.new("ImageButton")
@@ -315,97 +263,7 @@ local function createPanel()
 		end
 	end)
 
-	--// Lalol Hub Window
-	local lalolWindow = Instance.new("Frame")
-	lalolWindow.Size = UDim2.fromOffset(360, 300)
-	lalolWindow.Position = UDim2.new(0.5, -180, 0.5, -150)
-	lalolWindow.BackgroundColor3 = Color3.fromRGB(13, 13, 18)
-	lalolWindow.BorderSizePixel = 0
-	lalolWindow.Visible = false
-	lalolWindow.Parent = gui
-
-	local lalolWindowCorner = Instance.new("UICorner")
-	lalolWindowCorner.CornerRadius = UDim.new(0, 12)
-	lalolWindowCorner.Parent = lalolWindow
-
-	--// Lalol Header
-	local lalolHeader = Instance.new("Frame")
-	lalolHeader.Size = UDim2.new(1, 0, 0, 45)
-	lalolHeader.BackgroundTransparency = 1
-	lalolHeader.Parent = lalolWindow
-
-	local lalolTitle = Instance.new("TextLabel")
-	lalolTitle.Size = UDim2.new(1, -70, 1, 0)
-	lalolTitle.Position = UDim2.fromOffset(15, 0)
-	lalolTitle.BackgroundTransparency = 1
-	lalolTitle.Text = "Lalol Hub"
-	lalolTitle.TextColor3 = Color3.new(1, 1, 1)
-	lalolTitle.TextSize = 17
-	lalolTitle.Font = Enum.Font.GothamBold
-	lalolTitle.TextXAlignment = Enum.TextXAlignment.Left
-	lalolTitle.Parent = lalolHeader
-
-	--// Close
-	local lalolClose = Instance.new("TextButton")
-	lalolClose.Size = UDim2.fromOffset(34, 30)
-	lalolClose.Position = UDim2.new(1, -42, 0, 7)
-	lalolClose.BackgroundColor3 = Color3.fromRGB(28, 28, 35)
-	lalolClose.BorderSizePixel = 0
-	lalolClose.Text = "×"
-	lalolClose.TextColor3 = Color3.new(1, 1, 1)
-	lalolClose.TextSize = 20
-	lalolClose.Font = Enum.Font.GothamBold
-	lalolClose.Parent = lalolHeader
-
-	local lalolCloseCorner = Instance.new("UICorner")
-	lalolCloseCorner.CornerRadius = UDim.new(0, 8)
-	lalolCloseCorner.Parent = lalolClose
-
-	--// Code Box
-	local codeBox = Instance.new("TextBox")
-	codeBox.Size = UDim2.new(1, -24, 1, -75)
-	codeBox.Position = UDim2.fromOffset(12, 52)
-	codeBox.BackgroundColor3 = Color3.fromRGB(23, 23, 30)
-	codeBox.BorderSizePixel = 0
-	codeBox.Text = ""
-	codeBox.PlaceholderText = 'loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-LALOL-Hub-Backdoor-Scanner-Without-the-Hint-52003"))()'
-	codeBox.TextColor3 = Color3.new(1, 1, 1)
-	codeBox.PlaceholderColor3 = Color3.fromRGB(110, 110, 120)
-	codeBox.TextSize = 12
-	codeBox.Font = Enum.Font.Code
-	codeBox.TextXAlignment = Enum.TextXAlignment.Left
-	codeBox.TextYAlignment = Enum.TextYAlignment.Top
-	codeBox.ClearTextOnFocus = false
-	codeBox.MultiLine = true
-	codeBox.Parent = lalolWindow
-
-	local codeCorner = Instance.new("UICorner")
-	codeCorner.CornerRadius = UDim.new(0, 8)
-	codeCorner.Parent = codeBox
-
-	--// Status
-	local status = Instance.new("TextLabel")
-	status.Size = UDim2.new(1, -24, 0, 20)
-	status.Position = UDim2.new(0, 12, 1, -25)
-	status.BackgroundTransparency = 1
-	status.Text = "Ready"
-	status.TextColor3 = Color3.fromRGB(150, 150, 160)
-	status.TextSize = 11
-	status.Font = Enum.Font.Gotham
-	status.TextXAlignment = Enum.TextXAlignment.Left
-	status.Parent = lalolWindow
-
-	--// Lalol Hub Open
-	lalolHub.MouseButton1Click:Connect(function()
-		lalolWindow.Visible = true
-	end)
-
-	--// Lalol Hub Close
-	lalolClose.MouseButton1Click:Connect(function()
-		lalolWindow.Visible = false
-	end)
-
-	--// Drag Main Panel
+	--// Drag
 	local dragging = false
 	local dragStart
 	local startPos
@@ -447,6 +305,7 @@ local function createPanel()
 
 	--// Minimize
 	minimize.MouseButton1Click:Connect(function()
+
 		small.Position = UDim2.fromOffset(
 			panel.AbsolutePosition.X + panel.AbsoluteSize.X - 55,
 			panel.AbsolutePosition.Y + panel.AbsoluteSize.Y - 55
@@ -465,6 +324,7 @@ end
 
 --// Password
 local function checkPassword()
+
 	if passwordBox.Text == "sscyber team" then
 		createPanel()
 	else
