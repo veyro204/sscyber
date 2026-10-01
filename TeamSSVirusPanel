@@ -11,15 +11,16 @@ gui.ResetOnSpawn = false
 gui.Parent = player:WaitForChild("PlayerGui")
 
 local function RGBText(button)
-	task.spawn(function()
-		local hue = 0
+task.spawn(function()
+local hue = 0
 
-		while button.Parent do
-			hue = (hue + 0.008) % 1
-			button.TextColor3 = Color3.fromHSV(hue, 1, 1)
-			task.wait(0.02)
-		end
-	end)
+while button.Parent do  
+		hue = (hue + 0.008) % 1  
+		button.TextColor3 = Color3.fromHSV(hue, 1, 1)  
+		task.wait(0.02)  
+	end  
+end)
+
 end
 
 local loading = Instance.new("Frame")
@@ -38,10 +39,10 @@ logo.ScaleType = Enum.ScaleType.Fit
 logo.Parent = loading
 
 task.spawn(function()
-	while logo.Parent do
-		logo.Rotation += 2
-		task.wait(0.015)
-	end
+while logo.Parent do
+logo.Rotation += 2
+task.wait(0.015)
+end
 end)
 
 local title = Instance.new("TextLabel")
@@ -67,7 +68,7 @@ status.Parent = loading
 task.wait(3)
 
 if loading.Parent then
-	loading:Destroy()
+loading:Destroy()
 end
 
 local panel = Instance.new("Frame")
@@ -127,10 +128,10 @@ headerLogo.ScaleType = Enum.ScaleType.Fit
 headerLogo.Parent = header
 
 task.spawn(function()
-	while headerLogo.Parent do
-		headerLogo.Rotation += 2
-		task.wait(0.015)
-	end
+while headerLogo.Parent do
+headerLogo.Rotation += 2
+task.wait(0.015)
+end
 end)
 
 local panelTitle = Instance.new("TextLabel")
@@ -250,7 +251,7 @@ lalolStroke.Parent = lalolHub
 RGBText(lalolHub)
 
 lalolHub.MouseButton1Click:Connect(function()
-	loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-LALOL-Hub-Backdoor-Scanner-Without-the-Hint-52003"))()
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-LALOL-Hub-Backdoor-Scanner-Without-the-Hint-52003"))()
 end)
 
 local filingAll = Instance.new("TextButton")
@@ -278,35 +279,7 @@ filingStroke.Parent = filingAll
 RGBText(filingAll)
 
 filingAll.MouseButton1Click:Connect(function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/K1LAS1K/Ultimate-Fling-GUI/main/flingscript.lua"))()
-end)
-
-local godMode = Instance.new("TextButton")
-godMode.Size = UDim2.new(1, -20, 0, 42)
-godMode.Position = UDim2.fromOffset(10, 114)
-godMode.BackgroundColor3 = Color3.fromRGB(18, 32, 23)
-godMode.BackgroundTransparency = 0.05
-godMode.BorderSizePixel = 0
-godMode.Text = "God Mode"
-godMode.TextColor3 = Color3.fromRGB(255, 255, 255)
-godMode.TextSize = 13
-godMode.Font = Enum.Font.GothamBold
-godMode.Parent = content
-
-local godCorner = Instance.new("UICorner")
-godCorner.CornerRadius = UDim.new(0, 10)
-godCorner.Parent = godMode
-
-local godStroke = Instance.new("UIStroke")
-godStroke.Color = Color3.fromRGB(45, 150, 75)
-godStroke.Transparency = 0.25
-godStroke.Thickness = 1.2
-godStroke.Parent = godMode
-
-RGBText(godMode)
-
-godMode.MouseButton1Click:Connect(function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/Rawbr10/Roblox-Scripts/refs/heads/main/God%20Mode%20Script%20Universal"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/K1LAS1K/Ultimate-Fling-GUI/main/flingscript.lua"))()
 end)
 
 local dragging = false
@@ -314,38 +287,41 @@ local dragStart
 local startPosition
 
 header.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1
-		or input.UserInputType == Enum.UserInputType.Touch then
+if input.UserInputType == Enum.UserInputType.MouseButton1
+or input.UserInputType == Enum.UserInputType.Touch then
 
-		dragging = true
-		dragStart = input.Position
-		startPosition = panel.Position
-	end
+dragging = true  
+	dragStart = input.Position  
+	startPosition = panel.Position  
+end
+
 end)
 
 UserInputService.InputChanged:Connect(function(input)
-	if dragging and (
-		input.UserInputType == Enum.UserInputType.MouseMovement
-			or input.UserInputType == Enum.UserInputType.Touch
-		) then
+if dragging and (
+input.UserInputType == Enum.UserInputType.MouseMovement
+or input.UserInputType == Enum.UserInputType.Touch
+) then
 
-		local delta = input.Position - dragStart
+local delta = input.Position - dragStart  
 
-		panel.Position = UDim2.new(
-			startPosition.X.Scale,
-			startPosition.X.Offset + delta.X,
-			startPosition.Y.Scale,
-			startPosition.Y.Offset + delta.Y
-		)
-	end
+	panel.Position = UDim2.new(  
+		startPosition.X.Scale,  
+		startPosition.X.Offset + delta.X,  
+		startPosition.Y.Scale,  
+		startPosition.Y.Offset + delta.Y  
+	)  
+end
+
 end)
 
 UserInputService.InputEnded:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1
-		or input.UserInputType == Enum.UserInputType.Touch then
+if input.UserInputType == Enum.UserInputType.MouseButton1
+or input.UserInputType == Enum.UserInputType.Touch then
 
-		dragging = false
-	end
+dragging = false  
+end
+
 end)
 
 local minimizedLogo = Instance.new("ImageButton")
@@ -371,24 +347,24 @@ minimizedStroke.Thickness = 2
 minimizedStroke.Parent = minimizedLogo
 
 task.spawn(function()
-	while minimizedLogo.Parent do
-		if minimizedLogo.Visible then
-			minimizedLogo.Rotation += 2
-		end
-		task.wait(0.015)
-	end
+while minimizedLogo.Parent do
+if minimizedLogo.Visible then
+minimizedLogo.Rotation += 2
+end
+task.wait(0.015)
+end
 end)
 
 minimizeButton.MouseButton1Click:Connect(function()
-	panel.Visible = false
-	minimizedLogo.Visible = true
+panel.Visible = false
+minimizedLogo.Visible = true
 end)
 
 minimizedLogo.MouseButton1Click:Connect(function()
-	minimizedLogo.Visible = false
-	panel.Visible = true
+minimizedLogo.Visible = false
+panel.Visible = true
 end)
 
 closeButton.MouseButton1Click:Connect(function()
-	gui:Destroy()
+gui:Destroy()
 end)
