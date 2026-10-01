@@ -1,0 +1,370 @@
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local LOGO_ID = "rbxassetid://130910831750255"
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "SSVIRUS_PANEL"
+gui.IgnoreGuiInset = true
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local function RGBText(button)
+task.spawn(function()
+local hue = 0
+
+while button.Parent do  
+		hue = (hue + 0.008) % 1  
+		button.TextColor3 = Color3.fromHSV(hue, 1, 1)  
+		task.wait(0.02)  
+	end  
+end)
+
+end
+
+local loading = Instance.new("Frame")
+loading.Size = UDim2.fromScale(1, 1)
+loading.BackgroundColor3 = Color3.fromRGB(5, 5, 7)
+loading.BorderSizePixel = 0
+loading.Parent = gui
+
+local logo = Instance.new("ImageLabel")
+logo.Size = UDim2.fromOffset(180, 180)
+logo.AnchorPoint = Vector2.new(0.5, 0.5)
+logo.Position = UDim2.fromScale(0.5, 0.43)
+logo.BackgroundTransparency = 1
+logo.Image = LOGO_ID
+logo.ScaleType = Enum.ScaleType.Fit
+logo.Parent = loading
+
+task.spawn(function()
+while logo.Parent do
+logo.Rotation += 2
+task.wait(0.015)
+end
+end)
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 45)
+title.Position = UDim2.new(0, 0, 0.43, 105)
+title.BackgroundTransparency = 1
+title.Text = "SSVIRUS"
+title.TextColor3 = Color3.fromRGB(35, 255, 95)
+title.TextSize = 27
+title.Font = Enum.Font.GothamBold
+title.Parent = loading
+
+local status = Instance.new("TextLabel")
+status.Size = UDim2.new(1, 0, 0, 25)
+status.Position = UDim2.new(0, 0, 0.43, 145)
+status.BackgroundTransparency = 1
+status.Text = "LOADING..."
+status.TextColor3 = Color3.fromRGB(150, 150, 155)
+status.TextSize = 12
+status.Font = Enum.Font.Gotham
+status.Parent = loading
+
+task.wait(3)
+
+if loading.Parent then
+loading:Destroy()
+end
+
+local panel = Instance.new("Frame")
+panel.Size = UDim2.fromOffset(390, 360)
+panel.AnchorPoint = Vector2.new(0.5, 0.5)
+panel.Position = UDim2.fromScale(0.5, 0.5)
+panel.BackgroundColor3 = Color3.fromRGB(10, 15, 12)
+panel.BackgroundTransparency = 0.08
+panel.BorderSizePixel = 0
+panel.Parent = gui
+
+local panelCorner = Instance.new("UICorner")
+panelCorner.CornerRadius = UDim.new(0, 16)
+panelCorner.Parent = panel
+
+local panelStroke = Instance.new("UIStroke")
+panelStroke.Color = Color3.fromRGB(45, 120, 70)
+panelStroke.Transparency = 0.35
+panelStroke.Thickness = 1.4
+panelStroke.Parent = panel
+
+local glassHighlight = Instance.new("Frame")
+glassHighlight.Size = UDim2.new(1, -4, 0, 2)
+glassHighlight.Position = UDim2.fromOffset(2, 2)
+glassHighlight.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+glassHighlight.BackgroundTransparency = 0.92
+glassHighlight.BorderSizePixel = 0
+glassHighlight.Parent = panel
+
+local glassCorner = Instance.new("UICorner")
+glassCorner.CornerRadius = UDim.new(1, 0)
+glassCorner.Parent = glassHighlight
+
+local header = Instance.new("Frame")
+header.Size = UDim2.new(1, 0, 0, 58)
+header.BackgroundColor3 = Color3.fromRGB(8, 25, 14)
+header.BackgroundTransparency = 0.12
+header.BorderSizePixel = 0
+header.Parent = panel
+
+local headerCorner = Instance.new("UICorner")
+headerCorner.CornerRadius = UDim.new(0, 16)
+headerCorner.Parent = header
+
+local headerStroke = Instance.new("UIStroke")
+headerStroke.Color = Color3.fromRGB(40, 110, 60)
+headerStroke.Transparency = 0.55
+headerStroke.Thickness = 1
+headerStroke.Parent = header
+
+local headerLogo = Instance.new("ImageLabel")
+headerLogo.Size = UDim2.fromOffset(38, 38)
+headerLogo.Position = UDim2.fromOffset(12, 10)
+headerLogo.BackgroundTransparency = 1
+headerLogo.Image = LOGO_ID
+headerLogo.ScaleType = Enum.ScaleType.Fit
+headerLogo.Parent = header
+
+task.spawn(function()
+while headerLogo.Parent do
+headerLogo.Rotation += 2
+task.wait(0.015)
+end
+end)
+
+local panelTitle = Instance.new("TextLabel")
+panelTitle.Size = UDim2.new(1, -125, 0, 25)
+panelTitle.Position = UDim2.fromOffset(60, 9)
+panelTitle.BackgroundTransparency = 1
+panelTitle.Text = "SSVIRUS"
+panelTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+panelTitle.TextSize = 17
+panelTitle.Font = Enum.Font.GothamBold
+panelTitle.TextXAlignment = Enum.TextXAlignment.Left
+panelTitle.Parent = header
+
+local subtitle = Instance.new("TextLabel")
+subtitle.Size = UDim2.new(1, -125, 0, 18)
+subtitle.Position = UDim2.fromOffset(60, 31)
+subtitle.BackgroundTransparency = 1
+subtitle.Text = "SSVIRUS TEAM"
+subtitle.TextColor3 = Color3.fromRGB(115, 190, 135)
+subtitle.TextSize = 10
+subtitle.Font = Enum.Font.Gotham
+subtitle.TextXAlignment = Enum.TextXAlignment.Left
+subtitle.Parent = header
+
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.fromOffset(28, 28)
+closeButton.Position = UDim2.new(1, -36, 0, 8)
+closeButton.BackgroundColor3 = Color3.fromRGB(15, 65, 30)
+closeButton.BackgroundTransparency = 0.15
+closeButton.BorderSizePixel = 0
+closeButton.Text = "×"
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.TextSize = 20
+closeButton.Font = Enum.Font.GothamBold
+closeButton.Parent = header
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 8)
+closeCorner.Parent = closeButton
+
+RGBText(closeButton)
+
+local minimizeButton = Instance.new("TextButton")
+minimizeButton.Size = UDim2.fromOffset(28, 28)
+minimizeButton.Position = UDim2.new(1, -70, 0, 8)
+minimizeButton.BackgroundColor3 = Color3.fromRGB(12, 45, 22)
+minimizeButton.BackgroundTransparency = 0.15
+minimizeButton.BorderSizePixel = 0
+minimizeButton.Text = "—"
+minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+minimizeButton.TextSize = 17
+minimizeButton.Font = Enum.Font.GothamBold
+minimizeButton.Parent = header
+
+local minimizeCorner = Instance.new("UICorner")
+minimizeCorner.CornerRadius = UDim.new(0, 8)
+minimizeCorner.Parent = minimizeButton
+
+RGBText(minimizeButton)
+
+local scriptsTab = Instance.new("TextLabel")
+scriptsTab.Size = UDim2.new(1, -24, 0, 42)
+scriptsTab.Position = UDim2.fromOffset(12, 70)
+scriptsTab.BackgroundColor3 = Color3.fromRGB(20, 150, 55)
+scriptsTab.BackgroundTransparency = 0.08
+scriptsTab.BorderSizePixel = 0
+scriptsTab.Text = "Scripts"
+scriptsTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+scriptsTab.TextSize = 12
+scriptsTab.Font = Enum.Font.GothamBold
+scriptsTab.Parent = panel
+
+local scriptsCorner = Instance.new("UICorner")
+scriptsCorner.CornerRadius = UDim.new(0, 10)
+scriptsCorner.Parent = scriptsTab
+
+local content = Instance.new("Frame")
+content.Size = UDim2.new(1, -24, 1, -125)
+content.Position = UDim2.fromOffset(12, 118)
+content.BackgroundColor3 = Color3.fromRGB(10, 18, 13)
+content.BackgroundTransparency = 0.12
+content.BorderSizePixel = 0
+content.Parent = panel
+
+local contentCorner = Instance.new("UICorner")
+contentCorner.CornerRadius = UDim.new(0, 11)
+contentCorner.Parent = content
+
+local contentStroke = Instance.new("UIStroke")
+contentStroke.Color = Color3.fromRGB(40, 90, 55)
+contentStroke.Transparency = 0.35
+contentStroke.Thickness = 1
+contentStroke.Parent = content
+
+local lalolHub = Instance.new("TextButton")
+lalolHub.Size = UDim2.new(1, -20, 0, 42)
+lalolHub.Position = UDim2.fromOffset(10, 10)
+lalolHub.BackgroundColor3 = Color3.fromRGB(18, 32, 23)
+lalolHub.BackgroundTransparency = 0.05
+lalolHub.BorderSizePixel = 0
+lalolHub.Text = "Lalol Hub"
+lalolHub.TextColor3 = Color3.fromRGB(255, 255, 255)
+lalolHub.TextSize = 13
+lalolHub.Font = Enum.Font.GothamBold
+lalolHub.Parent = content
+
+local lalolCorner = Instance.new("UICorner")
+lalolCorner.CornerRadius = UDim.new(0, 10)
+lalolCorner.Parent = lalolHub
+
+local lalolStroke = Instance.new("UIStroke")
+lalolStroke.Color = Color3.fromRGB(45, 150, 75)
+lalolStroke.Transparency = 0.25
+lalolStroke.Thickness = 1.2
+lalolStroke.Parent = lalolHub
+
+RGBText(lalolHub)
+
+lalolHub.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-LALOL-Hub-Backdoor-Scanner-Without-the-Hint-52003"))()
+end)
+
+local filingAll = Instance.new("TextButton")
+filingAll.Size = UDim2.new(1, -20, 0, 42)
+filingAll.Position = UDim2.fromOffset(10, 62)
+filingAll.BackgroundColor3 = Color3.fromRGB(18, 32, 23)
+filingAll.BackgroundTransparency = 0.05
+filingAll.BorderSizePixel = 0
+filingAll.Text = "Filing All"
+filingAll.TextColor3 = Color3.fromRGB(255, 255, 255)
+filingAll.TextSize = 13
+filingAll.Font = Enum.Font.GothamBold
+filingAll.Parent = content
+
+local filingCorner = Instance.new("UICorner")
+filingCorner.CornerRadius = UDim.new(0, 10)
+filingCorner.Parent = filingAll
+
+local filingStroke = Instance.new("UIStroke")
+filingStroke.Color = Color3.fromRGB(45, 150, 75)
+filingStroke.Transparency = 0.25
+filingStroke.Thickness = 1.2
+filingStroke.Parent = filingAll
+
+RGBText(filingAll)
+
+filingAll.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/K1LAS1K/Ultimate-Fling-GUI/main/flingscript.lua"))()
+end)
+
+local dragging = false
+local dragStart
+local startPosition
+
+header.InputBegan:Connect(function(input)
+if input.UserInputType == Enum.UserInputType.MouseButton1
+or input.UserInputType == Enum.UserInputType.Touch then
+
+dragging = true  
+	dragStart = input.Position  
+	startPosition = panel.Position  
+end
+
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+if dragging and (
+input.UserInputType == Enum.UserInputType.MouseMovement
+or input.UserInputType == Enum.UserInputType.Touch
+) then
+
+local delta = input.Position - dragStart  
+
+	panel.Position = UDim2.new(  
+		startPosition.X.Scale,  
+		startPosition.X.Offset + delta.X,  
+		startPosition.Y.Scale,  
+		startPosition.Y.Offset + delta.Y  
+	)  
+end
+
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+if input.UserInputType == Enum.UserInputType.MouseButton1
+or input.UserInputType == Enum.UserInputType.Touch then
+
+dragging = false  
+end
+
+end)
+
+local minimizedLogo = Instance.new("ImageButton")
+minimizedLogo.Size = UDim2.fromOffset(58, 58)
+minimizedLogo.AnchorPoint = Vector2.new(1, 1)
+minimizedLogo.Position = UDim2.new(1, -25, 1, -130)
+minimizedLogo.BackgroundColor3 = Color3.fromRGB(8, 12, 9)
+minimizedLogo.BackgroundTransparency = 0.08
+minimizedLogo.BorderSizePixel = 0
+minimizedLogo.Image = LOGO_ID
+minimizedLogo.ScaleType = Enum.ScaleType.Fit
+minimizedLogo.Visible = false
+minimizedLogo.Parent = gui
+
+local minimizedCorner = Instance.new("UICorner")
+minimizedCorner.CornerRadius = UDim.new(1, 0)
+minimizedCorner.Parent = minimizedLogo
+
+local minimizedStroke = Instance.new("UIStroke")
+minimizedStroke.Color = Color3.fromRGB(35, 255, 95)
+minimizedStroke.Transparency = 0.1
+minimizedStroke.Thickness = 2
+minimizedStroke.Parent = minimizedLogo
+
+task.spawn(function()
+while minimizedLogo.Parent do
+if minimizedLogo.Visible then
+minimizedLogo.Rotation += 2
+end
+task.wait(0.015)
+end
+end)
+
+minimizeButton.MouseButton1Click:Connect(function()
+panel.Visible = false
+minimizedLogo.Visible = true
+end)
+
+minimizedLogo.MouseButton1Click:Connect(function()
+minimizedLogo.Visible = false
+panel.Visible = true
+end)
+
+closeButton.MouseButton1Click:Connect(function()
+gui:Destroy()
+end)
