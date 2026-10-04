@@ -496,6 +496,11 @@ local scripts = {
 		desc = "Universal Loader",
 		url = "https://raw.githubusercontent.com/PulseZax/Loader/refs/heads/main/.lua",
 	},
+	{
+		name = "Fly V3",
+		desc = "Fly by Hibatzzz",
+		url = "https://rawscripts.net/raw/Universal-Script-fly-v3-by-hibatzzz-243731",
+	},
 }
 
 for i, data in ipairs(scripts) do
@@ -627,6 +632,7 @@ end
 
 infoCard(106, "Owner :", "C00LWHITE")
 infoCard(164, "Owner 2 :", "SSDEVIL")
+infoCard(222, "Owner 3 :", "Sskid")
 
 -- Tab switching (slide)
 local current = "scripts"
